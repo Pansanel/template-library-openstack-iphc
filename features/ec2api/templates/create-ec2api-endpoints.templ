@@ -1,0 +1,15 @@
+#!/bin/sh
+
+echo "EC2 API user and role creation"
+openstack user create --domain EC2API_DOMAIN_NAME --password EC2API_PASSWORD --email EC2API_EMAIL EC2API_USERNAME
+openstack role add --project service --user EC2API_USERNAME admin
+openstack service create --name  ec2-api \
+--description "ec2api" ec2api
+
+echo "EC2 API service endpoint creation"
+openstack endpoint create --region REGION_NAME ec2api public \
+http://EC2API_CONTROLLER_HOST:EC2API_PORT/v1/%\(tenant_id\)s
+openstack endpoint create --region REGION_NAME ec2api internal \
+http://EC2API_MGMT_HOST:EC2API_PORT/v1/%\(tenant_id\)s
+openstack endpoint create --region REGION_NAME ec2api admin \
+http://EC2API_MGMT_HOST:EC2API_PORT/v1/%\(tenant_id\)s

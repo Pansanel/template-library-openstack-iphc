@@ -1,0 +1,120 @@
+declaration template defaults/openstack/schema/schema;
+
+include 'defaults/openstack/schema/types';
+
+
+@documentation {
+        list of keystone configuration sections
+}
+type openstack_keystone_config = extensible {
+        'DEFAULT' : openstack_DEFAULTS
+        'database' : openstack_database
+        'memcache' : openstack_keystone_memcache
+        'revoke' : openstack_keystone_revoke
+        'token' : openstack_keystone_token
+        'oslo_messaging_rabbit' : openstack_oslo_messaging_rabbit
+};
+
+@documentation {
+        list of barbican configuration sections
+}
+type openstack_barbican_config = extensible {
+        'DEFAULT' : openstack_DEFAULTS
+        'keystone_authtoken' : openstack_keystone_authtoken
+        'simple_crypto_plugin': openstack_simple_crypto_plugin
+};
+
+
+@documentation {
+        list of ceilometer configuration sections
+}
+type openstack_ceilometer_config = extensible {
+        'DEFAULT' : openstack_DEFAULTS
+        'database' : openstack_database
+        'oslo_messaging_rabbit' : openstack_oslo_messaging_rabbit
+        'keystone_authtoken' : openstack_keystone_authtoken
+        'service_credentials' : openstack_service_credentials
+};
+
+
+@documentation {
+        list of cinder configuration sections
+}
+type openstack_cinder_config = extensible {
+        'DEFAULT' : openstack_DEFAULTS
+        'database' : openstack_database
+        'oslo_messaging_rabbit' : openstack_oslo_messaging_rabbit
+        'keystone_authtoken' : openstack_keystone_authtoken
+};
+
+
+@documentation {
+        list of glance configuration sections
+}
+type openstack_glance_config = extensible {
+        'DEFAULT' : openstack_DEFAULTS
+        'database' : openstack_database
+        'oslo_messaging_rabbit' : openstack_oslo_messaging_rabbit
+        'keystone_authtoken' : openstack_keystone_authtoken
+};
+
+
+@documentation {
+        list of heat configuration sections
+}
+type openstack_heat_config = extensible {
+        'DEFAULT' : openstack_DEFAULTS
+        'database' : openstack_database
+        'keystone_authtoken' : openstack_keystone_authtoken
+};
+
+
+@documentation {
+        list of magnum configuration sections
+}
+type openstack_magnum_config = extensible {
+        'DEFAULT' : openstack_DEFAULTS
+        'database' : openstack_database
+        'keystone_authtoken' : openstack_keystone_authtoken
+};
+
+
+@documentation {
+        list of neutron configuration sections
+}
+type openstack_neutron_config = extensible {
+        'DEFAULT' : openstack_DEFAULTS
+        'database' : openstack_database
+        'oslo_messaging_rabbit' : openstack_oslo_messaging_rabbit
+        'keystone_authtoken' : openstack_keystone_authtoken
+};
+
+@documentation {
+        list of neutron configuration sections
+}
+type openstack_neutron_compute_config = extensible {
+        'DEFAULT' : openstack_DEFAULTS
+        'oslo_messaging_rabbit' : openstack_oslo_messaging_rabbit
+        'keystone_authtoken' : openstack_keystone_authtoken
+};
+
+
+@documentation {
+        list of nova configuration sections
+}
+type openstack_nova_config = extensible {
+        'DEFAULT' : openstack_DEFAULTS
+        'database' : openstack_database
+        'oslo_messaging_rabbit' : openstack_oslo_messaging_rabbit
+        'keystone_authtoken' : openstack_keystone_authtoken
+};
+
+
+@documentation {
+        list of nova compute configuration sections
+}
+type openstack_nova_compute_config = extensible {
+        'DEFAULT' : openstack_DEFAULTS
+        'oslo_messaging_rabbit' : openstack_oslo_messaging_rabbit
+        'keystone_authtoken' : openstack_keystone_authtoken
+};

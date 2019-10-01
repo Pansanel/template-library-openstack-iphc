@@ -1,0 +1,22 @@
+#!/bin/sh
+
+echo "Nova user and role creation"
+openstack user create --name=nova --pass=NOVA_PASSWORD --email=NOVA_EMAIL
+openstack role add --user=nova --project=service admin
+
+echo "Placement user creation"
+openstack user create --name=placement --pass=PLACEMENT_PASSWORD --email=PLACEMENT_EMAIL
+openstack role add --user=placement --project=service admin
+
+echo "Nova Compute service endpoint creation"
+openstack service create --name=nova --description="OpenStack Compute" compute
+NOVA_SERVICE_ID=$(keystone service-list | awk -v var="volume" '$0 ~ var { print $2 }')
+openstack endpoint create --region REGION_NAME compute public http://NOVA_CONTROLLER_HOST:8774/v2.1
+openstack endpoint create --region REGION_NAME compute internal http://NOVA_MGMT_HOST:8774/v2.1
+openstack endpoint create --region REGION_NAME compute admin http://NOVA_MGMT_HOST:8774/v2.1
+
+echo "Placement API service endpoint creation"
+openstack service create --name placement --description "Placement API" placement
+openstack endpoint cerate --region REGION_NAME placement public http://NOVA_CONTROLLER:8778
+openstack endpoint cerate --region REGION_NAME placement internal http://NOVA_MGMT_HOST:8778
+openstack endpoint cerate --region REGION_NAME placement admin http://NOVA_MGMT_HOST:8778
